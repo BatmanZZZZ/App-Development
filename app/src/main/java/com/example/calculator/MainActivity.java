@@ -33,5 +33,40 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void convert() {
+        String input = inputField.getText().toString();
+        String inputUnit = inputSpinner.getSelectedItem().toString();
+        String outputUnit = outputSpinner.getSelectedItem().toString();
 
+        double inputValue = Double.parseDouble(input);
+        double outputValue = 0;
+
+        if (inputUnit.equals("cm")) {
+            if (outputUnit.equals("inch")) {
+                outputValue = inputValue / 2.54;
+            } else if (outputUnit.equals("foot")) {
+                outputValue = inputValue / 30.48;
+            } else {
+                outputValue = inputValue;
+            }
+        } else if (inputUnit.equals("inch")) {
+            if (outputUnit.equals("cm")) {
+                outputValue = inputValue * 2.54;
+            } else if (outputUnit.equals("foot")) {
+                outputValue = inputValue / 12;
+            } else {
+                outputValue = inputValue;
+            }
+        } else if (inputUnit.equals("foot")) {
+            if (outputUnit.equals("cm")) {
+                outputValue = inputValue * 30.48;
+            } else if (outputUnit.equals("inch")) {
+                outputValue = inputValue * 12;
+            } else {
+                outputValue = inputValue;
+            }
+        }
+
+        outputField.setText(String.format("%.3f ", outputValue));
+    }
 }
